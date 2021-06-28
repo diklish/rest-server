@@ -14,10 +14,19 @@ public class IncrementController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
+    private final AtomicLong counterMAX = new AtomicLong(1000000);
+
     @GetMapping("/increment")
-    public Increment Increment(@RequestParam(value = "name", defaultValue = "World") String name) throws InterruptedException {
+    public Increment increment(@RequestParam(value = "name", defaultValue = "World") String name) throws InterruptedException {
         long rnd= Utils.random(1000,2000);
         Thread.sleep(rnd);
         return new Increment(counter.incrementAndGet(), String.format(template, name));
+    }
+
+    @GetMapping("/decrement")
+    public Increment decrement(@RequestParam(value = "name", defaultValue = "World") String name) throws InterruptedException {
+        long rnd= Utils.random(1000,2000);
+        Thread.sleep(rnd);
+        return new Increment(counter.decrementAndGet(), String.format(template, name));
     }
 }
