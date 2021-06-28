@@ -14,7 +14,6 @@ public class IncrementController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    private final AtomicLong counterMAX = new AtomicLong(1000000);
 
     @GetMapping("/increment")
     public Increment increment(@RequestParam(value = "name", defaultValue = "World") String name) throws InterruptedException {
